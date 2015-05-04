@@ -1,0 +1,11 @@
+.wowbraryShortcodeGUI {
+	background-color: #ccc;
+	border: solid #2647a0 3px;
+	padding: 0.5em 1em 1em 1em;
+	display: table;
+	margin: 1px;
+}
+
+.wowbraryShortcodeGUI h2 {
+	color: #2647a0;
+}
