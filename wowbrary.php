@@ -14,14 +14,16 @@ if ( is_admin() ) {
 
 add_filter('mce_external_plugins', 'wowbrary_register_tinymce_javascript');
 function wowbrary_register_tinymce_javascript($plugin_array) {
-   $plugin_array['wowbrary_shortcode'] = plugins_url('/js/plugin.js', __FILE__);
-   return $plugin_array;
+  $plugin_path = plugins_url('/js/tinymce-plugins', __FILE__);
+  $plugin_array['noneditable'] = $plugin_path . '/noneditable/plugin.js';
+  $plugin_array['wowbrary_shortcode'] = $plugin_path . '/wowbrary_shortcode/plugin.js';
+  return $plugin_array;
 }
 
 add_filter('mce_buttons', 'wowbrary_register_buttons');
 function wowbrary_register_buttons($buttons) {
-   array_push($buttons, 'Wowbrary');
-   return $buttons;
+  array_push($buttons, 'Wowbrary');
+  return $buttons;
 }
 
 add_shortcode( 'wowbrary', 'wowbrary_shortcode_handler' );

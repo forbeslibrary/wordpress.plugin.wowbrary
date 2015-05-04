@@ -13,11 +13,11 @@ module.exports = function(grunt) {
 				config: ".eslintrc",
 			},
 
-			plugin: ["js/plugin.js",],
+			plugin: ["js/**/plugin.js",],
 		},
 
 		jshint: {
-			plugin: ["js/plugin.js",],
+			plugin: ["js/**/plugin.js",],
 		},
 
 		jscs: {
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 				config: ".jscsrc",
 			},
 
-			plugin: ["js/plugin.js",],
+			plugin: ["js/**/plugin.js",],
 		},
 
 		uglify: {
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
 			},
 
 			plugin: {
-				src: ["js/*.js"],
+				src: ["js/**/plugin.js"],
 				expand: true,
 				ext: ".min.js"
 			}

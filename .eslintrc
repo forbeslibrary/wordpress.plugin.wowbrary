@@ -31,7 +31,6 @@
 		"max-depth": [1, 8],
 		"max-statements": [2, 150],
 		"max-len": [1, 140, 4],
-		"eol-last": 0,
-		"no-console": 0
+		"eol-last": 0
 	}
 }

@@ -6,7 +6,6 @@
  */
 
 /*global tinymce:true */
-/*global console:true */
 
 tinymce.PluginManager.add('wowbrary_shortcode', wowbraryShortcodePlugin, ['noneditable']);
 
@@ -43,11 +42,8 @@ function wowbraryShortcodePlugin(editor, url) {
 
 	// replace the wowbrary gui with the original shortcode on save
 	editor.on('PostProcess', function(e) {
-		console.log(e);
 		if (e.save || e.source_view) {
-			console.log('replacing');
 			e.content = self._undo_wowbrary_shortcode(e.content);
-			console.log(e.content);
 		}
 	});
 
