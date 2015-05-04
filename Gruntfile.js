@@ -1,8 +1,12 @@
 module.exports = function(grunt) {
-  var packageData = grunt.file.readJSON("package.json");
+	var packageData = grunt.file.readJSON("package.json");
 
 	grunt.initConfig({
 		pkg: packageData,
+
+		phplint: {
+				php: ["*.php"],
+		},
 
 		eslint: {
 			options: {
@@ -13,7 +17,7 @@ module.exports = function(grunt) {
 		},
 
 		jshint: {
-      plugin: ["js/plugin.js",],
+			plugin: ["js/plugin.js",],
 		},
 
 		jscs: {
@@ -21,7 +25,7 @@ module.exports = function(grunt) {
 				config: ".jscsrc",
 			},
 
-      plugin: ["js/plugin.js",],
+			plugin: ["js/plugin.js",],
 		},
 
 		uglify: {
@@ -41,7 +45,7 @@ module.exports = function(grunt) {
 
 	require("load-grunt-tasks")(grunt);
 
-	grunt.registerTask("lint", ["eslint", "jshint", "jscs"]);
+	grunt.registerTask("lint", ["eslint", "jshint", "jscs", "phplint"]);
 	grunt.registerTask("minify", ["uglify"]);
 	grunt.registerTask("default", ["lint", "minify"]);
 };
