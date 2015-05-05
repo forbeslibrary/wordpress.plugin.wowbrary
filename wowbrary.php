@@ -75,22 +75,24 @@ function wowbrary_shortcode_handler( $atts, $content = null ) {
 <!--Wowbrary Widget Start-->
 <div id="wowbrary">
 <script src="<?php echo $widget_url; ?>"  type="text/javascript"></script>
-<script>
-jQuery(document).ready( function($) {
-   $("#wowbrary>table").addClass("plain");
-   function setTableWidth() {
-      $("#wowbrary>table").width($("<?php echo $container_selector; ?>").width());
-      $("#wowbrary>table tr").width($("<?php echo $container_selector; ?>").width());
-      $("#wowbrary>table div").width($("<?php echo $container_selector; ?>").width());
-   }
-   setTableWidth();
-   $("#wowbrary>table tr:nth-child(4)>td").css("text-align","center");
-   $("#wowbrary>table tr:nth-child(5)>td").css("text-align","center");
-   $(window).resize( function() {
+<?php if ($container_selector): ?>
+  <script>
+  jQuery(document).ready( function($) {
+     $("#wowbrary>table").addClass("plain");
+     function setTableWidth() {
+        $("#wowbrary>table").width($("<?php echo $container_selector; ?>").width());
+        $("#wowbrary>table tr").width($("<?php echo $container_selector; ?>").width());
+        $("#wowbrary>table div").width($("<?php echo $container_selector; ?>").width());
+     }
      setTableWidth();
-   } );
-});
-</script>
+     $("#wowbrary>table tr:nth-child(4)>td").css("text-align","center");
+     $("#wowbrary>table tr:nth-child(5)>td").css("text-align","center");
+     $(window).resize( function() {
+       setTableWidth();
+     } );
+  });
+  </script>
+<?php endif; ?>
 </div>
 <!--Wowbrary Widget End--><?php
   return ob_get_clean();
