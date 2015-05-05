@@ -64,11 +64,9 @@ function wowbraryShortcodePlugin(editor, url) {
 			}
 		}
 
-		var win = tinymce.ui.Factory.create({
+		var win = tinymce.activeEditor.windowManager.open({
 			type: 'window',
-			layout: "flex",
-			pack: "center",
-			align: "center",
+			bodyType: 'tabpanel',
 			onSubmit: function() {
 				var shortcode = '[wowbrary';
 				var items = win.find('*');
@@ -81,88 +79,46 @@ function wowbraryShortcodePlugin(editor, url) {
 				shortcode += ']';
 				editor.insertContent(shortcode);
 			},
-			items: {
-				type: "form",
-				padding: 20,
-				labelGap: 30,
-				spacing: 10,
-				onPostRender: function() {
-					this.find('[name]').each(function(item) {
-						if (item.name() in data) {
-							item.value(data[item.name()]);
-						}
-					});
+			onPostRender: function() {
+				this.find('[name]').each(function(item) {
+					if (item.name() in data) {
+						item.value(data[item.name()]);
+					}
+				});
+			},
+			body:	[
+				{
+					title: 'Size',
+					type: 'form',
+					items: wowbraryFormData.sizeItems
 				},
-				items: [
-					{type: 'textbox', name: 'height', size: 40, label: 'Height'},
-					{type: 'textbox', name: 'count', size: 40, label: 'Max Count'},
-					{type: 'listbox', name: 'motion', label: 'Motion', values: [
-						{text: 'One at a time', value: 'one-at-a-time'},
-						{text: 'Continuous', value: 'continuous'},
-						{text: 'All at once', value: 'all-at-once'},
-						{text: 'Morph', value: 'morph'}
-					]},
-					{type: 'checkbox', name: 'noelectronic', text: 'Block electronic?', label: ' '},
-					{type: 'listbox', name: 'category', label: 'Category', values: [
-						{value: 'GEN', text: 'Top Choices'},
-						{value: 'ART', text: 'Arts & Photography'},
-						{value: 'BIO', text: 'Biographies & Memoirs'},
-						{value: 'BUS', text: 'Business & Investing'},
-						{value: 'CDS', text: 'CDs: Music & Shows'},
-						{value: 'CHI', text: 'Business & Investing'},
-						{value: 'CGR', text: 'Comics & Graphic Novels'},
-						{value: 'COM', text: 'Computers & Internet'},
-						{value: 'COO', text: 'Cooking, Food & Wine'},
-						{value: 'DVD', text: 'DVDs'},
-						{value: 'EBO', text: 'eBooks & eAudios'},
-						{value: 'ENT', text: 'Entertainment'},
-						{value: 'HEA', text: 'Health, Mind & Body'},
-						{value: 'HIS', text: 'History'},
-						{value: 'HOM', text: 'Home & Garden'},
-						{value: 'LRG', text: 'Large Print'},
-						{value: 'LIT', text: 'Literature & Fiction'},
-						{value: 'MYS', text: 'Mysteries & Thrillers'},
-						{value: 'NEN', text: 'Non-English'},
-						{value: 'OUT', text: 'Outdoors & Nature'},
-						{value: 'PAR', text: 'Parenting & Family'},
-						{value: 'PRO', text: 'Professional & Technical'},
-						{value: 'REF', text: 'Reference'},
-						{value: 'REL', text: 'Religion & Spirituality'},
-						{value: 'ROM', text: 'Romance'},
-						{value: 'SCI', text: 'Science'},
-						{value: 'SFF', text: 'Science Fiction & Fantasy'},
-						{value: 'SOC', text: 'Society'},
-						{value: 'SPO', text: 'Sports'},
-						{value: 'TEE', text: 'Teen'},
-						{value: 'TRA', text: 'Travel'}
-					]},
-					{type: 'button', name: 'submit', text:'submit', onclick: function() {
-						win.submit();
-					}}
-				]
-			}
-		}).renderTo().reflow();
+				{
+					title: 'Appearance',
+					type: 'form',
+					items: wowbraryFormData.appearanceItems
+				},
+				{
+					title: 'Other',
+					type: 'form',
+					items: wowbraryFormData.otherItems
+				}
+			]
+		});
 	}
 
 	/**
 	 * Replace the wowbrary shortcode with the wowbrary GUI
 	 */
 	self._do_wowbrary_shortcode = function (content) {
-		return content.replace(/\[wowbrary([^\]]*)\]/g, function(match, p1, offset) {
+		return content.replace(/\[wowbrary([^\]]*)\]/g, function(match, p1) {
 			// we store the shortcode, minus the brackets, in the data-wowbrary attribute
-			var matchAtr = tinymce.DOM.encode(JSON.stringify('wowbrary ' + p1));
+			var matchAtr = tinymce.DOM.encode(JSON.stringify('wowbrary' + p1));
 			var replacement = '';
-			if (offset === 0) {
-				replacement += '<p>&nbsp;</p>';
-			}
 			replacement += '<div class="wowbraryShortcodeGUI mceNonEditable mceItem" ';
 			replacement += 'data-wowbrary="' + (matchAtr) + '">';
 			replacement += '<h2>Wowbrary</h2>';
 			replacement += 'wowbrary ' + p1;
 			replacement += '</div>';
-			if (offset + match.length >= content.length) {
-				replacement += '<p>&nbsp;</p>';
-			}
 			return replacement;
 		});
 	};
@@ -233,3 +189,69 @@ function wowbraryShortcodePlugin(editor, url) {
 	};
 
 }
+
+var wowbraryFormData = {
+	sizeItems: [
+		{type: 'textbox', name: 'height', size: 40, label: 'Height'},
+		{type: 'textbox', name: 'width', size: 40, label: 'Max Width'},
+		{type: 'textbox', name: 'container', size: 40, label: 'Selector'},
+		{type: 'label', text: '(If selector is set, the widget will be resized to match the size of the selected element.)'}
+	],
+	appearanceItems: [
+		{type: 'listbox', name: 'motion', label: 'Motion', values: [
+			{text: 'One at a time', value: 'one-at-a-time'},
+			{text: 'Continuous', value: 'continuous'},
+			{text: 'All at once', value: 'all-at-once'},
+			{text: 'Morph', value: 'morph'}
+		]},
+		{type: 'listbox', name: 'imagesize', label: 'Image Size', values: [
+			{text: 'Small', value: 'S'},
+			{text: 'Medium', value: 'M'},
+			{text: 'Large', value: 'L'}
+		]},
+		{type: 'textbox', name: 'imagescale', size: 40, label: 'Image Scale (%)'},
+		{type: 'textbox', name: 'reflectionsize', size: 40, label: 'Reflection Size (%)'},
+		{type: 'textbox', name: 'spacing', size: 40, label: 'Spacing'},
+		{type: 'textbox', name: 'switchtime', size: 40, label: 'Switch Time (ms)'},
+		{type: 'textbox', name: 'pause', size: 40, label: 'Pause Time (ms)'},
+		{type: 'checkbox', name: 'switchonlyonclick', text: 'Switch only on click?', label: ' '}
+	],
+	otherItems: [
+		{type: 'checkbox', name: 'noelectronic', text: 'Block electronic?', label: ' '},
+		{type: 'listbox', name: 'category', label: 'Category', values: [
+			{value: 'GEN', text: 'Top Choices'},
+			{value: 'ART', text: 'Arts & Photography'},
+			{value: 'BIO', text: 'Biographies & Memoirs'},
+			{value: 'BUS', text: 'Business & Investing'},
+			{value: 'CDS', text: 'CDs: Music & Shows'},
+			{value: 'CHI', text: 'Business & Investing'},
+			{value: 'CGR', text: 'Comics & Graphic Novels'},
+			{value: 'COM', text: 'Computers & Internet'},
+			{value: 'COO', text: 'Cooking, Food & Wine'},
+			{value: 'DVD', text: 'DVDs'},
+			{value: 'EBO', text: 'eBooks & eAudios'},
+			{value: 'ENT', text: 'Entertainment'},
+			{value: 'HEA', text: 'Health, Mind & Body'},
+			{value: 'HIS', text: 'History'},
+			{value: 'HOM', text: 'Home & Garden'},
+			{value: 'LRG', text: 'Large Print'},
+			{value: 'LIT', text: 'Literature & Fiction'},
+			{value: 'MYS', text: 'Mysteries & Thrillers'},
+			{value: 'NEN', text: 'Non-English'},
+			{value: 'OUT', text: 'Outdoors & Nature'},
+			{value: 'PAR', text: 'Parenting & Family'},
+			{value: 'PRO', text: 'Professional & Technical'},
+			{value: 'REF', text: 'Reference'},
+			{value: 'REL', text: 'Religion & Spirituality'},
+			{value: 'ROM', text: 'Romance'},
+			{value: 'SCI', text: 'Science'},
+			{value: 'SFF', text: 'Science Fiction & Fantasy'},
+			{value: 'SOC', text: 'Society'},
+			{value: 'SPO', text: 'Sports'},
+			{value: 'TEE', text: 'Teen'},
+			{value: 'TRA', text: 'Travel'}
+		]},
+		{type: 'textbox', name: 'count', size: 40, label: 'Max Count'}
+	]
+
+};
