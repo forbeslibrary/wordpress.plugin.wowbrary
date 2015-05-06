@@ -4,6 +4,15 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: packageData,
 
+		version: {
+	    deafult: {
+	      options: {
+	        prefix: 'Version:\\s*'
+	      },
+	      src: ['wowbrary.php']
+	    },
+	  },
+
 		phplint: {
 				php: ["*.php"],
 		},
@@ -67,5 +76,5 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("lint", ["eslint", "jshint", "jscs", "phplint"]);
 	grunt.registerTask("minify", ["uglify"]);
-	grunt.registerTask("default", ["lint", "minify", "compress"]);
+	grunt.registerTask("default", ["version", "lint", "minify", "compress"]);
 };

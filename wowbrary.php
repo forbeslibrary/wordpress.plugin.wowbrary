@@ -5,7 +5,7 @@
  * Author: Benjamin Kalish
  * Author URI: https://github.com/bkalish
  * Description: Allows easy embedding of the Wowbrary widget using shortcodes and allows the widget to be dynamically resized.
- * Version: 1.0
+ * Version: 1.0.0
  * License: GPL2
  */
 /* Copyright 2015 Forbes Library, Northampton, Massachusetts
