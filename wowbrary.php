@@ -11,7 +11,7 @@
 /* Copyright 2015 Forbes Library, Northampton, Massachusetts
 
   This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License, version 2, as 
+  it under the terms of the GNU General Public License, version 2, as
   published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -30,8 +30,8 @@ if ( is_admin() ) {
 add_filter('mce_external_plugins', 'wowbrary_register_tinymce_javascript');
 function wowbrary_register_tinymce_javascript($plugin_array) {
   $plugin_path = plugins_url('/js/tinymce-plugins', __FILE__);
-  $plugin_array['noneditable'] = $plugin_path . '/noneditable/plugin.js';
-  $plugin_array['wowbrary_shortcode'] = $plugin_path . '/wowbrary_shortcode/plugin.js';
+  $plugin_array['noneditable'] = $plugin_path . '/noneditable/plugin.min.js';
+  $plugin_array['wowbrary_shortcode'] = $plugin_path . '/wowbrary_shortcode/plugin.min.js';
   return $plugin_array;
 }
 
