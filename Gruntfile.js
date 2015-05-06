@@ -58,8 +58,9 @@ module.exports = function(grunt) {
 					mode: 'zip'
 				},
 				files: [
-					{src: ['@(*.php|*.md)']},
-					{src: ['js/**/*.min.js']}
+					{src: ['@(*.php|*.md)'], dest: 'wowbrary'},
+					{src: ['js/**/*.min.js'], dest: 'wowbrary'},
+					{src: ['js/**/*.css'], dest: 'wowbrary'}
 				]
 			}
 		},
