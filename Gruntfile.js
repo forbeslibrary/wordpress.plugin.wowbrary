@@ -53,6 +53,13 @@ module.exports = function(grunt) {
 					{src: ['js/**/*.min.js']}
 				]
 			}
+		},
+
+		githooks: {
+			all: {
+				// Will run the jshint and test:unit tasks at every commit
+				'pre-commit': 'default'
+			}
 		}
 	});
 

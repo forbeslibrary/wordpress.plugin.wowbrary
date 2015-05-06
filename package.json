@@ -9,6 +9,7 @@
     "grunt-jscs": "~0.6.2",
     "grunt-phplint": "~0.0.5",
     "grunt-contrib-compress": "~0.13.0",
+    "grunt-githooks": "~0.3.1",
     "load-grunt-tasks": "~0.6.0"
   }
 }
