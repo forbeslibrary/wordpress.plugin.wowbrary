@@ -11,7 +11,7 @@ edit an existing widget you may select it and click the Wowbrary button or simpl
 + Provides an option to automatically resize the a Wowbrary widget to fit the width of a specified container element.
 
 ## Installation
-+ Unzip or clone the Wowbrary plugin into your Wordpress plugin directory (`wp-content/plugins`).
++ Unzip WowbraryForWordpress.zip into your Wordpress plugin directory (`wp-content/plugins`).
 + Log into your Wordpress installation and visit the Plugins screen.
 + Find the Wowbrary plugin in the list and click **Activate Plugin** to activate it.
 
@@ -31,7 +31,7 @@ further documentation [log in to the Wowbrary site](http://wowbrary.org/sponsorl
 © 2015 Forbes Library, Northampton, Massachusetts
 
 This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
+it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
