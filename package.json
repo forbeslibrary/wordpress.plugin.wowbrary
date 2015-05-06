@@ -8,6 +8,7 @@
     "grunt-eslint": "~1.0.0",
     "grunt-jscs": "~0.6.2",
     "grunt-phplint": "~0.0.5",
+    "grunt-contrib-compress": "~0.13.0",
     "load-grunt-tasks": "~0.6.0"
   }
 }

@@ -40,6 +40,19 @@ module.exports = function(grunt) {
 				expand: true,
 				ext: ".min.js"
 			}
+		},
+
+		compress: {
+			main: {
+				options: {
+					archive: 'WowbraryForWordpress.zip',
+					mode: 'zip'
+				},
+				files: [
+					{src: ['@(*.php|*.md)']},
+					{src: ['js/**/*.min.js']}
+				]
+			}
 		}
 	});
 
@@ -47,5 +60,5 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("lint", ["eslint", "jshint", "jscs", "phplint"]);
 	grunt.registerTask("minify", ["uglify"]);
-	grunt.registerTask("default", ["lint", "minify"]);
+	grunt.registerTask("default", ["lint", "minify", "compress"]);
 };
