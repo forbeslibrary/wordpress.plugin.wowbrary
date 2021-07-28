@@ -84,7 +84,7 @@ function wowbrary_shortcode_handler( $atts, $content = null ) {
   $container_selector = $atts['container'];
   unset($atts['container']);
 
-  $widget_url = "http://wowbrary.org/widgetslider.aspx?" . http_build_query($atts, '', '&amp;');
+  $widget_url = "https://wowbrary.org/widgetslider.aspx?" . http_build_query($atts, '', '&amp;');
 
   ob_start(); ?>
 <!--Wowbrary Widget Start-->
