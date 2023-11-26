@@ -1,6 +1,6 @@
 {
   "name": "wordpress.plugin.wowbrary",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devDependencies": {
     "grunt": "~1.6.1",
     "grunt-contrib-compress": "^2.0.0",
