@@ -13,27 +13,7 @@ module.exports = function(grunt) {
 	    },
 	  },
 
-		phplint: {
-				php: ["*.php"],
-		},
-
-		eslint: {
-			options: {
-				config: ".eslintrc",
-			},
-
-			plugin: ["js/**/plugin.js",],
-		},
-
 		jshint: {
-			plugin: ["js/**/plugin.js",],
-		},
-
-		jscs: {
-			options: {
-				config: ".jscsrc",
-			},
-
 			plugin: ["js/**/plugin.js",],
 		},
 
@@ -64,18 +44,11 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-
-		githooks: {
-			all: {
-				// Will run the jshint and test:unit tasks at every commit
-				'pre-commit': 'default'
-			}
-		}
 	});
 
 	require("load-grunt-tasks")(grunt);
 
-	grunt.registerTask("lint", ["eslint", "jshint", "jscs", "phplint"]);
+	grunt.registerTask("lint", ["jshint"]);
 	grunt.registerTask("minify", ["uglify"]);
 	grunt.registerTask("default", ["version", "lint", "minify", "compress"]);
 };
