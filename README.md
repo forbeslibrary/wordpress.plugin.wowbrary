@@ -27,6 +27,14 @@ further documentation [log in to the Wowbrary site](http://wowbrary.org/sponsorl
 + The `[wowbrary]` shortcode takes an additional argument, `container`. If this is set, the width of the Wowbrary widget will automatically be adjusted to match the width of the selected element (using css selector syntax). You may still need to set the `width` attribute (normally to the maximum expected width).
   + Example usage: `[wowbrary container="#content" width="800"]`
 
+## Building
+
+Build tasks are run using [Grunt](https://gruntjs.com/)
+
+To run all default tasks, simply run the command `grunt` from this directory
+
+
+
 ## License
 © 2015 Forbes Library, Northampton, Massachusetts
 
